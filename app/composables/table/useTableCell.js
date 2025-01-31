@@ -1,0 +1,70 @@
+export const useTableCell = () => {
+  const handleImage = ({ row, column }) => {
+    return h("div", { class: "flex items-center gap-3" }, [
+      h("img", {
+        class: "w-12 h-12 rounded-full",
+        src: row.original[column.id],
+        alt: row.original.name,
+        size: "lg",
+      }),
+    ]);
+  };
+
+  const sort = ({ column, UButton, label }) => {
+    const isSorted = column.getIsSorted();
+    return h(UButton, {
+      color: "neutral",
+      variant: "ghost",
+      label,
+      icon: isSorted
+        ? isSorted === "asc"
+          ? "i-lucide-arrow-up-narrow-wide"
+          : "i-lucide-arrow-down-narrow-wide"
+        : "i-lucide-arrow-up-down",
+      class: "-mx-2.5",
+
+      onClick: () => {
+        const nextSortingState = {
+          asc: "desc",
+          desc: false,
+          false: "asc",
+        }[isSorted];
+
+        if (nextSortingState === false) {
+          column.clearSorting();
+        } else {
+          column.toggleSorting(nextSortingState === "desc");
+        }
+      },
+    });
+  };
+
+  const actionCell = ({ row, components, getRowItems }) => {
+    return h(
+      "div",
+      { class: "text-right" },
+      h(
+        components.UDropdownMenu,
+        {
+          content: {
+            align: "end",
+          },
+          items: getRowItems(row),
+        },
+        () =>
+          h(components.UButton, {
+            icon: "i-lucide-ellipsis-vertical",
+            color: "neutral",
+            variant: "ghost",
+            class: "ml-auto",
+          })
+      )
+    );
+  };
+
+  return {
+    handleImage,
+    sort,
+    actionCell,
+  };
+};

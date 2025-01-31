@@ -1,0 +1,46 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme {
+  --font-sans: "Tajawal", sans-serif;
+  --container-8xl: 97rem;
+}
+
+@utility no-scrollbar {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@utility scrollbar-style {
+  overflow-y: auto;
+  max-height: 400px;
+
+  &::-webkit-scrollbar {
+    width: 9px;
+  }
+
+  @media (prefers-color-scheme: light) {
+    &::-webkit-scrollbar-track {
+      background: var(--color-zinc-100);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--color-zinc-400);
+    }
+  }
+
+  /* check id mode is dark */
+  @media (prefers-color-scheme: dark) {
+    &::-webkit-scrollbar-track {
+      background: var(--color-zinc-800);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--ui-color-neutral-700);
+    }
+  }
+}
