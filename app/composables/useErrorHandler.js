@@ -2,7 +2,7 @@ export const useErrorHandler = () => {
   const toast = useToast();
 
   const handleError = async (error) => {
-    // console.log("error :>> ", error);
+    console.log("error :>> ", error);
     // console.error("Request error:", error?.response?._data);
 
     if (error?.response?._data) {

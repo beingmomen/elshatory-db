@@ -26,7 +26,15 @@ const columns = ref([
     accessorKey: "title",
     header: "Title",
   },
-  { accessorKey: "description", header: "Description" },
+  {
+    accessorKey: "description",
+    header: "Description",
+    meta: {
+      class: {
+        td: "whitespace-normal max-w-[200px] ",
+      },
+    },
+  },
   {
     accessorKey: "image",
     header: "Image",
