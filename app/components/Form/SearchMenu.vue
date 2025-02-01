@@ -1,25 +1,34 @@
 <template>
-  <USelectMenu
-    v-model="value"
-    :items="data?.data || []"
-    :loading="status === 'pending'"
-    :multiple="multiple"
-    :searchable="searchable"
-    :icon="icon"
-    :placeholder="placeholder"
-    :label-key="labelKey"
-    :value-key="valueKey"
-    class="w-full"
+  <UFormField
+    :label="label"
+    :name="name"
+    :size="size"
+    :required="required"
+    :description="description"
+    :hint="hint"
+    :help="help"
   >
-    <template #leading="{ modelValue: selectedItem, ui }">
-      <UAvatar
-        v-if="selectedItem?.avatar"
-        v-bind="selectedItem.avatar"
-        :size="ui.leadingAvatarSize()"
-        :class="ui.leadingAvatar()"
-      />
-    </template>
-  </USelectMenu>
+    <USelectMenu
+      v-model="value"
+      :items="data || []"
+      :loading="status === 'pending'"
+      :multiple="multiple"
+      :icon="icon"
+      :placeholder="placeholder"
+      :label-key="labelKey"
+      :value-key="valueKey"
+      class="w-full"
+    >
+      <template #leading="{ modelValue: selectedItem, ui }">
+        <UAvatar
+          v-if="selectedItem?.avatar"
+          v-bind="selectedItem.avatar"
+          :size="ui.leadingAvatarSize()"
+          :class="ui.leadingAvatar()"
+        />
+      </template>
+    </USelectMenu>
+  </UFormField>
 </template>
 
 <script setup>
@@ -48,17 +57,42 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  label: {
+    type: String,
+    default: "",
+    required: false,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    default: "",
+  },
+  hint: {
+    type: String,
+    default: "",
+  },
+  help: {
+    type: String,
+    default: "",
+  },
   placeholder: {
     type: String,
-    default: "Select item",
+    default: "",
+  },
+  required: {
+    type: Boolean,
+    default: false,
+  },
+  size: {
+    type: String,
+    default: "lg",
   },
   icon: {
     type: String,
     default: "i-lucide-search",
-  },
-  searchable: {
-    type: Boolean,
-    default: true,
   },
 });
 

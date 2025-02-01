@@ -89,6 +89,11 @@ const items = ref([
       to: "/users",
     },
     {
+      label: "Skills",
+      icon: "i-lucide-tags",
+      to: "/skills",
+    },
+    {
       label: "Services",
       icon: "i-carbon-settings-services",
       to: "/services",

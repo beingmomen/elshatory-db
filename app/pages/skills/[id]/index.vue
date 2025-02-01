@@ -22,41 +22,12 @@
         />
 
         <FormInput
-          v-model="state.tag"
-          label="Tag"
-          name="tag"
+          v-model="state.icon"
+          label="Icon"
+          name="icon"
           size="xl"
           input-size="lg"
-        />
-
-        <FormInput
-          v-model="state.url"
-          label="Project URL"
-          name="url"
-          size="xl"
-          input-size="lg"
-        />
-
-        <FormSearchMenu
-          v-model="state.tagIds"
-          name="tagIds"
-          label="Tags"
-          size="xl"
-          input-size="lg"
-          url="/skills/all"
-          label-key="title"
-          multiple
-          icon="i-lucide-tags"
-          placeholder="Select tags"
-        />
-
-        <FormFileInput
-          v-model="state.image"
-          label="Image"
-          name="image"
-          size="xl"
-          input-size="lg"
-          folder="projects"
+          :trailing-icon="state.icon"
         />
 
         <div class="flex justify-end">
@@ -77,7 +48,7 @@
 
 <script setup>
 const { breadcrumbsItems, loading, state, schema, handleSubmit } =
-  await useProjectForm();
+  await useSkillForm();
 </script>
 
 <style lang="scss" scoped>

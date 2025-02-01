@@ -7,7 +7,7 @@
 <script setup>
 const UButton = resolveComponent("UButton");
 
-const { handleImage, sort } = useTableCell();
+const { handleImage, sort, handleLink } = useTableCell();
 const options = {
   title: "Projects",
   singleName: "project",
@@ -33,6 +33,7 @@ const columns = ref([
   {
     accessorKey: "url",
     header: "Project URL",
+    cell: ({ row, column }) => handleLink({ row, column, UButton }),
   },
   {
     accessorKey: "image",

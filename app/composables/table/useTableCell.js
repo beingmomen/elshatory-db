@@ -1,4 +1,15 @@
 export const useTableCell = () => {
+  const handleIcon = ({ row, column, UAvatar }) => {
+    return h("div", { class: "flex items-center gap-3" }, [
+      h(UAvatar, {
+        class: "w-12 h-12 rounded-full",
+        icon: row.original[column.id],
+        alt: row.original.name,
+        size: "lg",
+      }),
+    ]);
+  };
+
   const handleImage = ({ row, column }) => {
     return h("div", { class: "flex items-center gap-3" }, [
       h("img", {
@@ -6,6 +17,17 @@ export const useTableCell = () => {
         src: row.original[column.id],
         alt: row.original.name,
         size: "lg",
+      }),
+    ]);
+  };
+
+  const handleLink = ({ row, column, UButton }) => {
+    return h("div", { class: "flex items-center gap-3" }, [
+      h(UButton, {
+        to: row.original[column.id],
+        label: "View",
+        icon: "i-lucide-external-link",
+        target: "_blank",
       }),
     ]);
   };
@@ -64,6 +86,8 @@ export const useTableCell = () => {
 
   return {
     handleImage,
+    handleIcon,
+    handleLink,
     sort,
     actionCell,
   };
