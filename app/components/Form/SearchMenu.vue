@@ -1,0 +1,79 @@
+<template>
+  <USelectMenu
+    v-model="value"
+    :items="data?.data || []"
+    :loading="status === 'pending'"
+    :multiple="multiple"
+    :searchable="searchable"
+    :icon="icon"
+    :placeholder="placeholder"
+    :label-key="labelKey"
+    :value-key="valueKey"
+    class="w-full"
+  >
+    <template #leading="{ modelValue: selectedItem, ui }">
+      <UAvatar
+        v-if="selectedItem?.avatar"
+        v-bind="selectedItem.avatar"
+        :size="ui.leadingAvatarSize()"
+        :class="ui.leadingAvatar()"
+      />
+    </template>
+  </USelectMenu>
+</template>
+
+<script setup>
+const props = defineProps({
+  modelValue: {
+    type: [String, Number, Object, Array],
+    default: null,
+  },
+  labelKey: {
+    type: String,
+    default: "name",
+  },
+  valueKey: {
+    type: String,
+    default: "id",
+  },
+  url: {
+    type: String,
+    required: true,
+  },
+  loading: {
+    type: Boolean,
+    default: false,
+  },
+  multiple: {
+    type: Boolean,
+    default: false,
+  },
+  placeholder: {
+    type: String,
+    default: "Select item",
+  },
+  icon: {
+    type: String,
+    default: "i-lucide-search",
+  },
+  searchable: {
+    type: Boolean,
+    default: true,
+  },
+});
+
+const { data, status } = await useAPI(props.url, {
+  lazy: true,
+});
+
+const emit = defineEmits(["update:modelValue"]);
+
+const value = computed({
+  get() {
+    return props.modelValue;
+  },
+  set(value) {
+    emit("update:modelValue", value);
+  },
+});
+</script>

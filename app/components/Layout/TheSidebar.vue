@@ -93,6 +93,11 @@ const items = ref([
       icon: "i-carbon-settings-services",
       to: "/services",
     },
+    {
+      label: "Projects",
+      icon: "i-lucide-folder",
+      to: "/projects",
+    },
     // {
     //   label: "Settings",
     //   icon: "i-lucide-settings",

@@ -1,5 +1,5 @@
 import Joi from "joi";
-export const useServiceForm = async () => {
+export const useProjectForm = async () => {
   const { post, patch, get } = useApiRequest();
 
   const route = useRoute();
@@ -14,14 +14,14 @@ export const useServiceForm = async () => {
       icon: "i-lucide-house",
     },
     {
-      label: "Services",
-      icon: "i-carbon-settings-services",
-      to: "/services",
+      label: "Projects",
+      icon: "i-lucide-folder",
+      to: "/projects",
     },
     {
-      label: isEditing.value ? "Edit Service" : "New Service",
+      label: isEditing.value ? "Edit Project" : "New Project",
       icon: isEditing.value ? "i-lucide-edit" : "i-lucide-plus",
-      to: `/services/${id}`,
+      to: `/projects/${id}`,
     },
   ]);
 
@@ -29,7 +29,9 @@ export const useServiceForm = async () => {
 
   const state = reactive({
     title: "",
-    description: "",
+    tag: "",
+    url: "",
+    tagIds: [],
     image: "",
   });
 
@@ -38,9 +40,19 @@ export const useServiceForm = async () => {
       "string.empty": "Title is required",
       "any.required": "Title is required",
     }),
-    description: Joi.string().required().messages({
-      "string.empty": "Description is required",
-      "any.required": "Description is required",
+    tag: Joi.string().required().messages({
+      "string.empty": "Tag is required",
+      "any.required": "Tag is required",
+    }),
+    url: Joi.string().required().uri().messages({
+      "string.empty": "URL is required",
+      "any.required": "URL is required",
+      "string.uri": "Please enter a valid URL",
+    }),
+    tagIds: Joi.array().items(Joi.string()).min(3).required().messages({
+      "array.min": "Please select at least 3 tags",
+      "array.base": "Tags must be an array",
+      "any.required": "Tags are required",
     }),
     image: Joi.string().required().min(10).messages({
       "string.empty": "Image is required",
@@ -51,12 +63,12 @@ export const useServiceForm = async () => {
   const handleSubmit = async () => {
     try {
       if (isEditing.value) {
-        await patch(`/services/${id}`, state, {
-          redirectTo: "/services",
+        await patch(`/projects/${id}`, state, {
+          redirectTo: "/projects",
         });
       } else {
-        await post("/services", state, {
-          redirectTo: "/services",
+        await post("/projects", state, {
+          redirectTo: "/projects",
         });
       }
     } catch (error) {
@@ -66,10 +78,12 @@ export const useServiceForm = async () => {
   };
 
   if (isEditing.value) {
-    const { data } = await get(`/services/${id}`);
+    const { data } = await get(`/projects/${id}`);
 
     state.title = data.data.title;
-    state.description = data.data.description;
+    state.tag = data.data.tag;
+    state.url = data.data.url;
+    state.tagIds = data.data.tagIds;
     state.image = data.data.image;
   }
 
