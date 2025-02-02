@@ -31,6 +31,7 @@ export const useProjectForm = async () => {
     title: "",
     tag: "",
     url: "",
+    isActive: true,
     tagIds: [],
     image: "",
   });
@@ -49,6 +50,7 @@ export const useProjectForm = async () => {
       "any.required": "URL is required",
       "string.uri": "Please enter a valid URL",
     }),
+    isActive: Joi.boolean().required(),
     tagIds: Joi.array().items(Joi.string()).min(3).required().messages({
       "array.min": "Please select at least 3 tags",
       "array.base": "Tags must be an array",
@@ -83,6 +85,7 @@ export const useProjectForm = async () => {
     state.title = data.data.title;
     state.tag = data.data.tag;
     state.url = data.data.url;
+    state.isActive = data.data.isActive;
     state.tagIds = data.data.tagIds;
     state.image = data.data.image;
   }

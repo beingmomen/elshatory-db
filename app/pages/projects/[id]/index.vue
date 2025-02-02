@@ -59,6 +59,14 @@
           folder="projects"
         />
 
+        <FormSwitch
+          v-model="state.isActive"
+          label="Show Project"
+          name="isActive"
+          size="xl"
+          input-size="lg"
+        />
+
         <div class="flex justify-end">
           <UButton
             type="submit"

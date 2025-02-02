@@ -21,6 +21,17 @@ export const useTableCell = () => {
     ]);
   };
 
+  const handleStatus = ({ row, column, UBadge }) => {
+    return h("div", { class: "flex items-center gap-3" }, [
+      h(UBadge, {
+        color: row.original[column.id] ? "success" : "error",
+        label: row.original[column.id] ? "Active" : "Inactive",
+        size: "lg",
+        class: "font-bold ",
+      }),
+    ]);
+  };
+
   const handleLink = ({ row, column, UButton }) => {
     return h("div", { class: "flex items-center gap-3" }, [
       h(UButton, {
@@ -88,6 +99,7 @@ export const useTableCell = () => {
     handleImage,
     handleIcon,
     handleLink,
+    handleStatus,
     sort,
     actionCell,
   };

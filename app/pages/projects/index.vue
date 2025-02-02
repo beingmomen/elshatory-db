@@ -6,8 +6,9 @@
 
 <script setup>
 const UButton = resolveComponent("UButton");
+const UBadge = resolveComponent("UBadge");
 
-const { handleImage, sort, handleLink } = useTableCell();
+const { handleImage, sort, handleLink, handleStatus } = useTableCell();
 const options = {
   title: "Projects",
   singleName: "project",
@@ -25,6 +26,11 @@ const columns = ref([
   {
     accessorKey: "title",
     header: "Title",
+  },
+  {
+    accessorKey: "isActive",
+    header: "Show Project",
+    cell: ({ row, column }) => handleStatus({ row, column, UBadge }),
   },
   {
     accessorKey: "tag",
