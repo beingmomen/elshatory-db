@@ -104,6 +104,11 @@ const items = ref([
       to: "/projects",
     },
     {
+      label: "Clients",
+      icon: "i-lucide-users",
+      to: "/clients",
+    },
+    {
       label: "Testimonials",
       icon: "i-lucide-quote",
       to: "/testimonials",

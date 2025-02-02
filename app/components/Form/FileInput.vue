@@ -59,6 +59,7 @@ const loading = ref(false);
 
 if (props.isCloudinary) {
   image.value = `${cloudinary.cloudinaryUrl}${props.modelValue}`;
+  // console.log("image.value :>> ", image.value);
 } else {
   image.value = props.modelValue;
 }
