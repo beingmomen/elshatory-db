@@ -64,7 +64,7 @@ const columns = ref([
     header: "Description",
     meta: {
       class: {
-        td: "whitespace-normal max-w-[200px] ",
+        td: "whitespace-normal max-w-[400px] ",
       },
     },
   },
