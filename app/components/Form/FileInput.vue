@@ -1,11 +1,12 @@
 <template>
   <UFormField :label="label" :name="name" size="lg">
+    <!-- trailing -->
     <UInput
       class="w-full"
       type="file"
       :loading="loading"
+      :disabled="disabled"
       accept="image/*"
-      trailing
       :avatar="{
         src: image,
         alt: label || 'Avatar',
@@ -37,6 +38,10 @@ const props = defineProps({
     default: "",
     required: false,
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
   folder: {
     type: String,
     default: "",
@@ -52,7 +57,11 @@ const { cloudinary } = config.public;
 const image = ref("");
 const loading = ref(false);
 
-image.value = props.modelValue;
+if (props.isCloudinary) {
+  image.value = `${cloudinary.cloudinaryUrl}${props.modelValue}`;
+} else {
+  image.value = props.modelValue;
+}
 
 const handleFileInput = async (event) => {
   const file = event.target.files?.[0];
@@ -84,7 +93,7 @@ const uploadToCloudinary = async (file) => {
 
     image.value = response.secure_url;
     console.log("response :>> ", response);
-    emit("update:modelValue", response.secure_url);
+    emit("update:modelValue", `${response.public_id}.${response.format}`);
   } catch (error) {
     console.error("Error uploading to Cloudinary:", error);
   } finally {

@@ -4,6 +4,7 @@ TODO:
 
 - edit image path in user data composable
 - add folder prop to FileInput component
+- update FileInput in template
 
 Look at [Nuxt docs](https://nuxt.com/docs/getting-started/introduction) and [Nuxt UI docs](https://ui3.nuxt.dev) to learn more.
 

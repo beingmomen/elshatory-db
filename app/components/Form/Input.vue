@@ -12,6 +12,7 @@
       v-model="value"
       class="w-full"
       :placeholder="placeholder"
+      :disabled="disabled"
       :size="inputSize"
       :variant="variant"
       :icon="icon"
@@ -53,6 +54,10 @@ const props = defineProps({
     default: "",
   },
   required: {
+    type: Boolean,
+    default: false,
+  },
+  disabled: {
     type: Boolean,
     default: false,
   },

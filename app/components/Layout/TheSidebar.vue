@@ -103,6 +103,11 @@ const items = ref([
       icon: "i-lucide-folder",
       to: "/projects",
     },
+    {
+      label: "Testimonials",
+      icon: "i-lucide-quote",
+      to: "/testimonials",
+    },
     // {
     //   label: "Settings",
     //   icon: "i-lucide-settings",

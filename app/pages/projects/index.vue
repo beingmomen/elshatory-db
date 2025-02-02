@@ -5,6 +5,9 @@
 </template>
 
 <script setup>
+const config = useRuntimeConfig();
+const cloudinary = config.public.cloudinary;
+
 const UButton = resolveComponent("UButton");
 const UBadge = resolveComponent("UBadge");
 
@@ -16,6 +19,16 @@ const options = {
   fetchUrl: "/projects",
   deleteUrl: "/projects",
   editUrl: "/projects",
+  transform: (doc) => {
+    return {
+      ...doc,
+      data:
+        doc?.data?.map((testimonial) => ({
+          ...testimonial,
+          image: `${cloudinary.cloudinaryUrl}${testimonial.image}`,
+        })) || [],
+    };
+  },
 };
 
 const columns = ref([

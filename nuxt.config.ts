@@ -131,6 +131,7 @@ export default defineNuxtConfig({
       },
       appPublicUrl: process.env.APP_PUBLIC_URL,
       cloudinary: {
+        cloudinaryUrl: process.env.CLOUDINARY_URL,
         cloudName: process.env.CLOUDINARY_CLOUD_NAME,
         uploadPreset: process.env.CLOUDINARY_UPLOAD_PRESET,
         apiKey: process.env.CLOUDINARY_API_KEY,

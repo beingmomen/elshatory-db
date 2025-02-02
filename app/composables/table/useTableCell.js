@@ -21,11 +21,16 @@ export const useTableCell = () => {
     ]);
   };
 
-  const handleStatus = ({ row, column, UBadge }) => {
+  const handleStatus = ({
+    row,
+    column,
+    UBadge,
+    messages = { active: "Active", inactive: "Inactive" },
+  }) => {
     return h("div", { class: "flex items-center gap-3" }, [
       h(UBadge, {
         color: row.original[column.id] ? "success" : "error",
-        label: row.original[column.id] ? "Active" : "Inactive",
+        label: row.original[column.id] ? messages.active : messages.inactive,
         size: "lg",
         class: "font-bold ",
       }),
