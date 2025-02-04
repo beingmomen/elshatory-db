@@ -11,6 +11,7 @@
 <script setup>
 const UButton = resolveComponent("UButton");
 const UBadge = resolveComponent("UBadge");
+const { patch } = useApiRequest();
 
 const { sort, handleStatus } = useTableCell();
 const options = {
@@ -20,6 +21,25 @@ const options = {
   fetchUrl: "/contacts",
   deleteUrl: "/contacts",
   editUrl: "/contacts",
+  customOptions: {
+    copyId: true,
+    edit: false,
+    delete: true,
+    list: [
+      {
+        index: 1,
+        markAsView: {
+          label: "Mark as Viewed",
+          icon: "i-lucide-eye",
+          onSelect({ row }) {
+            patch(`/contacts/${row.original.id}`, {
+              isViewed: true,
+            });
+          },
+        },
+      },
+    ],
+  },
 };
 
 const columns = ref([

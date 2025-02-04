@@ -1,5 +1,11 @@
 export const useTableModule = async (options) => {
-  const { fetchUrl, deleteUrl, editUrl, transform = (doc) => doc } = options;
+  const {
+    fetchUrl,
+    deleteUrl,
+    editUrl,
+    transform = (doc) => doc,
+    customOptions = { copyId: true, edit: true, delete: true },
+  } = options;
   const { del } = useApiRequest();
   const toast = useToast();
 
@@ -55,8 +61,10 @@ export const useTableModule = async (options) => {
   }
 
   function getRowItems(row) {
-    return [
+    // Define base items without separators
+    let items = [
       {
+        visible: customOptions.copyId,
         label: "Copy ID",
         icon: "i-lucide-copy",
         onSelect() {
@@ -69,9 +77,7 @@ export const useTableModule = async (options) => {
         },
       },
       {
-        type: "separator",
-      },
-      {
+        visible: customOptions.edit,
         label: "Edit row",
         icon: "i-lucide-edit",
         onSelect() {
@@ -79,9 +85,7 @@ export const useTableModule = async (options) => {
         },
       },
       {
-        type: "separator",
-      },
-      {
+        visible: customOptions.delete,
         label: "Delete row",
         icon: "i-lucide-trash-2",
         async onSelect() {
@@ -89,6 +93,37 @@ export const useTableModule = async (options) => {
         },
       },
     ];
+
+    // Filter out invisible items first
+    items = items.filter((item) => item.visible !== false);
+
+    // Insert custom items from the list at their specified positions
+    if (customOptions.list?.length > 0) {
+      customOptions.list.forEach((customItem) => {
+        const [action, config] =
+          Object.entries(customItem).find(([key]) => key !== "index") || [];
+        if (action && config) {
+          const newItem = {
+            label: config.label,
+            icon: config.icon,
+            onSelect: () => config.onSelect({ row }),
+          };
+          items.splice(customItem.index, 0, newItem);
+        }
+      });
+    }
+
+    // Add separators between items
+    const itemsWithSeparators = [];
+    items.forEach((item, index) => {
+      itemsWithSeparators.push(item);
+      // Add separator after each item except the last one
+      if (index < items.length - 1) {
+        itemsWithSeparators.push({ type: "separator" });
+      }
+    });
+
+    return itemsWithSeparators;
   }
 
   return {
