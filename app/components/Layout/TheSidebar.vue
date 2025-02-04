@@ -118,6 +118,11 @@ const items = ref([
       icon: "i-lucide-phone",
       to: "/contacts",
     },
+    {
+      label: "Infos",
+      icon: "i-lucide-info",
+      to: "/infos",
+    },
     // {
     //   label: "Settings",
     //   icon: "i-lucide-settings",
