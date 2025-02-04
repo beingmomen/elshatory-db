@@ -10,6 +10,24 @@
       <CommonColorModeSelect />
     </div>
     <USeparator type="dashed" />
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-gray-900 dark:text-white font-semibold">
+          Build The Website
+        </p>
+        <span class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+          Configure the website structure and content.
+        </span>
+      </div>
+      <UButton
+        :loading="loading"
+        icon="i-lucide-refresh-cw"
+        @click="handleSubmit"
+      >
+        Build Website
+      </UButton>
+    </div>
+    <USeparator type="dashed" />
     <div class="grid grid-cols-3 gap-4">
       <div>
         <p class="text-gray-900 dark:text-white font-semibold">Profile</p>
@@ -34,6 +52,7 @@
 </template>
 
 <script setup>
+const { handleSubmit, loading } = useBuild();
 const pageTitle = inject("pageTitle");
 
 onMounted(() => {
