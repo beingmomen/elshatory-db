@@ -106,7 +106,7 @@ export const useTableModule = async (options) => {
           const newItem = {
             label: config.label,
             icon: config.icon,
-            onSelect: () => config.onSelect({ row }),
+            onSelect: () => config.onSelect({ row, refresh }),
           };
           items.splice(customItem.index, 0, newItem);
         }

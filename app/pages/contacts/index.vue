@@ -31,10 +31,30 @@ const options = {
         markAsView: {
           label: "Mark as Viewed",
           icon: "i-lucide-eye",
-          onSelect({ row }) {
-            patch(`/contacts/${row.original.id}`, {
-              isViewed: true,
-            });
+          onSelect({ row, refresh }) {
+            if (!row.original.isViewed) {
+              patch(`/contacts/${row.original.id}`, {
+                isViewed: true,
+              }).then(() => {
+                refresh?.();
+              });
+            }
+          },
+        },
+      },
+      {
+        index: 2,
+        markAsNotView: {
+          label: "Mark as Not Viewed",
+          icon: "i-lucide-eye-off",
+          onSelect({ row, refresh }) {
+            if (row.original.isViewed) {
+              patch(`/contacts/${row.original.id}`, {
+                isViewed: false,
+              }).then(() => {
+                refresh?.();
+              });
+            }
           },
         },
       },
