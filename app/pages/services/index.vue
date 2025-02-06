@@ -5,6 +5,9 @@
 </template>
 
 <script setup>
+const config = useRuntimeConfig();
+const cloudinary = config.public.cloudinary;
+
 const UButton = resolveComponent("UButton");
 
 const { handleImage, sort } = useTableCell();
@@ -15,6 +18,16 @@ const options = {
   fetchUrl: "/services",
   deleteUrl: "/services",
   editUrl: "/services",
+  transform: (doc) => {
+    return {
+      ...doc,
+      data:
+        doc?.data?.map((service) => ({
+          ...service,
+          image: `${cloudinary.cloudinaryUrl}${service.image}`,
+        })) || [],
+    };
+  },
 };
 
 const columns = ref([

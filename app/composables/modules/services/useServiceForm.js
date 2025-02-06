@@ -31,6 +31,7 @@ export const useServiceForm = async () => {
     title: "",
     description: "",
     image: "",
+    altText: "",
   });
 
   const schema = Joi.object({
@@ -45,6 +46,10 @@ export const useServiceForm = async () => {
     image: Joi.string().required().min(10).messages({
       "string.empty": "Image is required",
       "any.required": "Image is required",
+    }),
+    altText: Joi.string().required().messages({
+      "string.empty": "Alt text is required",
+      "any.required": "Alt text is required",
     }),
   });
 
@@ -71,6 +76,7 @@ export const useServiceForm = async () => {
     state.title = data.data.title;
     state.description = data.data.description;
     state.image = data.data.image;
+    state.altText = data.data.altText;
   }
 
   return {

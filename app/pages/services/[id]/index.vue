@@ -38,6 +38,14 @@
           folder="services"
         />
 
+        <FormInput
+          v-model="state.altText"
+          label="Alt Text"
+          name="altText"
+          size="xl"
+          input-size="lg"
+        />
+
         <div class="flex justify-end">
           <UButton
             type="submit"

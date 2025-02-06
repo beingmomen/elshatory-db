@@ -34,6 +34,7 @@ export const useProjectForm = async () => {
     isActive: true,
     tagIds: [],
     image: "",
+    altText: "",
   });
 
   const schema = Joi.object({
@@ -59,6 +60,10 @@ export const useProjectForm = async () => {
     image: Joi.string().required().min(10).messages({
       "string.empty": "Image is required",
       "any.required": "Image is required",
+    }),
+    altText: Joi.string().required().messages({
+      "string.empty": "Alt text is required",
+      "any.required": "Alt text is required",
     }),
   });
 
@@ -88,6 +93,7 @@ export const useProjectForm = async () => {
     state.isActive = data.data.isActive;
     state.tagIds = data.data.tagIds;
     state.image = data.data.image;
+    state.altText = data.data.altText;
   }
 
   return {

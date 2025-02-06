@@ -59,6 +59,14 @@
           folder="projects"
         />
 
+        <FormInput
+          v-model="state.altText"
+          label="Alt Text"
+          name="altText"
+          size="xl"
+          input-size="lg"
+        />
+
         <FormSwitch
           v-model="state.isActive"
           label="Show Project"
