@@ -1,5 +1,5 @@
 <template>
-  <UFormField :label="label" :name="name" size="lg">
+  <UFormField :label="label" :name="name" size="lg" :hint="hint">
     <!-- trailing -->
     <UInput
       class="w-full"
@@ -49,6 +49,10 @@ const props = defineProps({
   isCloudinary: {
     type: Boolean,
     default: true,
+  },
+  hint: {
+    type: String,
+    default: "",
   },
 });
 

@@ -32,6 +32,7 @@
         <FormFileInput
           v-model="state.image"
           label="Image"
+          hint="(400 x 340 PX)"
           name="image"
           size="xl"
           input-size="lg"
