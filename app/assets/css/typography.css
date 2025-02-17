@@ -1,0 +1,207 @@
+/* Typography styles for Tiptap Editor - Dark Mode */
+
+/* Base editor styles */
+.ProseMirror {
+  color: #e2e8f0;
+  background-color: #1a202c;
+}
+
+/* Headings */
+.ProseMirror h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 2rem 0 1rem;
+  color: #f7fafc;
+}
+
+.ProseMirror h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 1.8rem 0 0.9rem;
+  color: #f7fafc;
+}
+
+.ProseMirror h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 1.6rem 0 0.8rem;
+  color: #f7fafc;
+}
+
+.ProseMirror h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 1.4rem 0 0.7rem;
+  color: #f7fafc;
+}
+
+.ProseMirror h5 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 1.2rem 0 0.6rem;
+  color: #f7fafc;
+}
+
+.ProseMirror h6 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 1rem 0 0.5rem;
+  color: #f7fafc;
+}
+
+/* Paragraphs and basic text */
+.ProseMirror p {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 1rem 0;
+  color: #e2e8f0;
+}
+
+/* Lists */
+.ProseMirror ul,
+.ProseMirror ol {
+  margin: 1rem 0;
+  padding-left: 2rem;
+  color: #e2e8f0;
+}
+
+.ProseMirror li {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.ProseMirror ul li {
+  list-style-type: disc;
+}
+
+.ProseMirror ol li {
+  list-style-type: decimal;
+}
+
+/* Blockquotes */
+.ProseMirror blockquote {
+  border-left: 4px solid #4a5568;
+  margin: 1.5rem 0;
+  padding: 0.5rem 0 0.5rem 1rem;
+  font-style: italic;
+  color: #a0aec0;
+  background-color: #2d3748;
+}
+
+/* Code blocks */
+.ProseMirror pre {
+  background-color: #2d3748;
+  border-radius: 0.375rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  font-family: monospace;
+  font-size: 0.9rem;
+  overflow-x: auto;
+  color: #90cdf4;
+}
+
+.ProseMirror code {
+  background-color: #2d3748;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-family: monospace;
+  font-size: 0.9em;
+  color: #90cdf4;
+}
+
+/* Links */
+.ProseMirror a {
+  color: #63b3ed;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.ProseMirror a:hover {
+  color: #90cdf4;
+}
+
+/* Tables */
+.ProseMirror table {
+  border-collapse: collapse;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.ProseMirror th,
+.ProseMirror td {
+  border: 1px solid #4a5568;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.ProseMirror th {
+  background-color: #2d3748;
+  font-weight: 600;
+  color: #f7fafc;
+}
+
+/* Horizontal Rule */
+.ProseMirror hr {
+  border: none;
+  border-top: 2px solid #4a5568;
+  margin: 2rem 0;
+}
+
+/* Text Formatting */
+.ProseMirror strong {
+  font-weight: 600;
+  color: #f7fafc;
+}
+
+.ProseMirror em {
+  font-style: italic;
+}
+
+.ProseMirror s {
+  text-decoration: line-through;
+  color: #a0aec0;
+}
+
+/* Task Lists */
+.ProseMirror ul[data-type="taskList"] {
+  list-style: none;
+  padding: 0;
+}
+
+.ProseMirror ul[data-type="taskList"] li {
+  display: flex;
+  align-items: flex-start;
+  margin: 0.5rem 0;
+}
+
+.ProseMirror ul[data-type="taskList"] input[type="checkbox"] {
+  margin: 0.5rem 0.5rem 0 0;
+  background-color: #2d3748;
+  border: 1px solid #4a5568;
+}
+
+/* Images */
+.ProseMirror img {
+  max-width: 100%;
+  height: auto;
+  margin: 1rem 0;
+  border-radius: 0.375rem;
+  border: 1px solid #4a5568;
+}
+
+/* Editor Focus */
+.ProseMirror:focus {
+  outline: none;
+}
+
+/* Selection */
+.ProseMirror ::selection {
+  background: rgba(99, 179, 237, 0.3);
+  color: #f7fafc;
+}
