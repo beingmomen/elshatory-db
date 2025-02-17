@@ -10,7 +10,7 @@ export const useTableModule = async (options) => {
   const toast = useToast();
 
   const page = ref(1);
-  const globalFilter = ref("");
+  const globalFilter = ref(undefined);
 
   const { data, status, refresh } = await useAPI(fetchUrl, {
     query: {

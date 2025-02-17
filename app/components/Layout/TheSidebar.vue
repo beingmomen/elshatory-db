@@ -114,6 +114,11 @@ const items = ref([
       to: "/testimonials",
     },
     {
+      label: "Blog",
+      icon: "i-lucide-rss",
+      to: "/blog",
+    },
+    {
       label: "Contacts",
       icon: "i-lucide-phone",
       to: "/contacts",
