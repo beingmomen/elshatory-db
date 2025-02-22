@@ -16,7 +16,7 @@ const options = {
   routeName: "/blog",
   fetchUrl: "/blogs",
   deleteUrl: "/blogs",
-  editUrl: "/blogs",
+  editUrl: "/blog",
   transform: (doc) => {
     return {
       ...doc,

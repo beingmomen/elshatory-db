@@ -61,38 +61,32 @@
           icon="i-lucide-image-plus"
           color="primary"
           :variant="editor.isActive?.('link') ? 'link' : 'ghost'"
-          @click="setLink"
         />
 
         <template #content>
-          <div class="p-2">
-            <UInput
-              v-model="linkUrl"
-              class="w-full"
-              variant="soft"
-              placeholder="www.example.com"
-              :ui="{
-                base: 'pl-[57px] ',
-                leading: 'pointer-events-none',
-              }"
+          <div class="flex gap-4 items-center p-2">
+            <FormFileInput
+              v-model="image"
+              name="test"
+              size="xl"
+              input-size="lg"
+              folder="blog"
+              :full-path="true"
+            />
+            <UTooltip
+              v-if="image"
+              text="Add new link"
+              :content="{ side: 'right' }"
             >
-              <template #leading>
-                <p class="text-sm text-(--ui-text-muted)">https://</p>
-              </template>
-
-              <template v-if="linkUrl?.length" #trailing>
-                <UTooltip text="Add new link" :content="{ side: 'right' }">
-                  <UButton
-                    variant="link"
-                    color="primary"
-                    size="sm"
-                    icon="i-lucide-plus"
-                    aria-label="Confirm link"
-                    @click="confirmLink"
-                  />
-                </UTooltip>
-              </template>
-            </UInput>
+              <UButton
+                variant="outline"
+                color="primary"
+                size="sm"
+                icon="i-lucide-plus"
+                aria-label="Confirm link"
+                @click="setImage"
+              />
+            </UTooltip>
           </div>
         </template>
       </UPopover>
@@ -132,15 +126,33 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  title: {
+    type: String,
+    default: "Abdelmomen Elshatory",
+  },
   dir: {
     type: String,
-    default: "ltr",
+    default: "rtl",
   },
 });
 
 const emit = defineEmits(["update:modelValue"]);
 
-// console.log("decodeHTMLContent() :>> ", decodeHTMLContent());
+const image = ref("");
+
+const setImage = () => {
+  if (image.value) {
+    editor.value
+      .chain()
+      .focus()
+      .setImage({
+        src: image.value,
+        alt: props.title,
+        title: props.title,
+      })
+      .run();
+  }
+};
 
 const editor = useEditor({
   content: "",
@@ -159,6 +171,7 @@ const editor = useEditor({
       linkOnPaste: true, // Convert pasted URLs to links
       protocols: ["http", "https", "mailto", "tel"], // Allowed protocols
     }),
+    TiptapImage,
   ],
   onCreate: ({ editor }) => {
     if (props.modelValue) {

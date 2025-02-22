@@ -25,6 +25,21 @@ export const useBlogForm = async () => {
     },
   ]);
 
+  const statuses = ref([
+    {
+      label: "مسودة",
+      id: "draft",
+    },
+    {
+      label: "تم النشر",
+      id: "published",
+    },
+    {
+      label: "محذوف",
+      id: "archived",
+    },
+  ]);
+
   const loading = ref(false);
 
   const state = reactive({
@@ -34,6 +49,7 @@ export const useBlogForm = async () => {
     altText: "",
     tag: "",
     content: "",
+    status: "",
   });
 
   const schema = Joi.object({
@@ -60,6 +76,10 @@ export const useBlogForm = async () => {
     content: Joi.string().required().messages({
       "string.empty": "Content is required",
       "any.required": "Content is required",
+    }),
+    status: Joi.string().valid("draft", "published", "archived").messages({
+      "string.empty": "Status is required",
+      "any.required": "Status is required",
     }),
   });
 
@@ -89,6 +109,7 @@ export const useBlogForm = async () => {
     state.altText = data.data.altText;
     state.tag = data.data.tag;
     state.content = data.data.content;
+    state.status = data.data.status;
   }
 
   return {
@@ -98,5 +119,6 @@ export const useBlogForm = async () => {
     schema,
     handleSubmit,
     isEditing,
+    statuses,
   };
 };

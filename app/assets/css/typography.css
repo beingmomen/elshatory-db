@@ -104,6 +104,7 @@
   font-size: 0.9rem;
   overflow-x: auto;
   color: #90cdf4;
+  direction: ltr;
 }
 
 .ProseMirror code {
@@ -189,7 +190,7 @@
 /* Images */
 .ProseMirror img {
   max-width: 100%;
-  height: auto;
+  height: 200px;
   margin: 1rem 0;
   border-radius: 0.375rem;
   border: 1px solid #4a5568;

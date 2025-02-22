@@ -55,6 +55,16 @@
           input-size="lg"
         />
 
+        <FormInputMenu
+          v-if="isEditing"
+          v-model="state.status"
+          name="status"
+          label="Status"
+          size="xl"
+          input-size="lg"
+          :items="statuses"
+        />
+
         <FormTiptapEditor v-model="state.content" />
 
         <div class="flex justify-end">
@@ -74,8 +84,15 @@
 </template>
 
 <script setup>
-const { breadcrumbsItems, loading, state, schema, handleSubmit } =
-  await useBlogForm();
+const {
+  breadcrumbsItems,
+  loading,
+  state,
+  schema,
+  handleSubmit,
+  statuses,
+  isEditing,
+} = await useBlogForm();
 </script>
 
 <style lang="scss" scoped>

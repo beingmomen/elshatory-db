@@ -50,6 +50,10 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  fullPath: {
+    type: Boolean,
+    default: false,
+  },
   hint: {
     type: String,
     default: "",
@@ -98,7 +102,11 @@ const uploadToCloudinary = async (file) => {
 
     image.value = response.secure_url;
     console.log("response :>> ", response);
-    emit("update:modelValue", `${response.public_id}.${response.format}`);
+    if (props.fullPath) {
+      emit("update:modelValue", response.secure_url);
+    } else {
+      emit("update:modelValue", `${response.public_id}.${response.format}`);
+    }
   } catch (error) {
     console.error("Error uploading to Cloudinary:", error);
   } finally {
