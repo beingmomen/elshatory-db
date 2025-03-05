@@ -49,7 +49,7 @@ export const useBlogForm = async () => {
     altText: "",
     tag: "",
     content: "",
-    status: "",
+    status: "draft",
   });
 
   const schema = Joi.object({

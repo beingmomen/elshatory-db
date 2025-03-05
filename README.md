@@ -7,6 +7,8 @@ TODO:
 - update FileInput in template
 - add cloudinaryUrl in nuxt.config.ts env
 
+---
+
 Look at [Nuxt docs](https://nuxt.com/docs/getting-started/introduction) and [Nuxt UI docs](https://ui3.nuxt.dev) to learn more.
 
 ## Setup

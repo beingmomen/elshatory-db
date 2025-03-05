@@ -35,7 +35,7 @@
           name="image"
           size="xl"
           input-size="lg"
-          folder="clients"
+          folder="blog"
           hint="(640 × 360 px) or (16:9)"
         />
 

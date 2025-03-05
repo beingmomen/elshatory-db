@@ -50,6 +50,11 @@ const columns = ref([
   {
     accessorKey: "description",
     header: "Description",
+    meta: {
+      class: {
+        td: "whitespace-normal max-w-[400px] ",
+      },
+    },
   },
 ]);
 </script>
