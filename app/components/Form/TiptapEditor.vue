@@ -116,7 +116,7 @@
       :editor="editor"
     />
 
-    <!-- <article v-html="props.modelValue"></article> -->
+    <!-- <article v-html="decodeHTMLEntities(props.modelValue)"></article> -->
   </div>
 </template>
 
