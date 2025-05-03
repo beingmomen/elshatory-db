@@ -146,7 +146,7 @@ export default defineNuxtConfig({
   compatibilityDate: "2024-11-27",
 
   devServer: {
-    port: 8888,
+    port: process.env.PORT,
   },
 
   build: {
