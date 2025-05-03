@@ -31,7 +31,7 @@ jobs:
           # 🟡 إنشاء ملف .env حسب الفرع
       - name: Create .env file for Demo
         if: github.ref == 'refs/heads/main'
-        run: echo "${{ vars.ENV_DEMO }}" > config.env
+        run: echo "${{ vars.ENV_DEMO }}" > .env
 
       - name: Build project
         run: npm run build --if-present
@@ -62,7 +62,7 @@ jobs:
           # 🟡 إنشاء ملف .env حسب الفرع
       - name: Create .env file for Production
         if: github.ref == 'refs/heads/prod'
-        run: echo "${{ vars.ENV_PROD }}" > config.env
+        run: echo "${{ vars.ENV_PROD }}" > .env
 
       - name: Build project
         run: npm run build --if-present
