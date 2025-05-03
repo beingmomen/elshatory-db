@@ -87,7 +87,7 @@ export default defineNuxtConfig({
   css: ["~/assets/css/main.css"],
 
   tiptap: {
-    prefix: "Tiptap", //prefix for Tiptap imports, composables not included
+    prefix: "Tiptap", //prefix for Tiptap imports,  not included composables
     lowlight: {
       theme: "github-dark",
     },
