@@ -1,6 +1,6 @@
 # Nuxt UI v3 Starter
 
-TODO:
+TODO: --
 
 - edit image path in user data composable
 - add folder prop to FileInput component
