@@ -3,7 +3,7 @@
   <div class="tiptap-editor-ui w-fit mx-auto max-w-[950px]">
     <div
       v-if="editor"
-      class="button-group-container bg-slate-800 rounded-xl flex gap-2 overflow-hidden"
+      class="button-group-container bg-slate-800 rounded-xl flex gap-2 overflow-hidden sticky top-0 z-10"
     >
       <UPopover
         :ui="{
