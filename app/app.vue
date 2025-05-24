@@ -1,6 +1,6 @@
 <template>
   <UApp
-    :locale="en"
+    :locale="ar"
     :toaster="{
       position: 'top-center',
     }"
@@ -12,10 +12,10 @@
 </template>
 
 <script setup>
-import { en } from "@nuxt/ui/locale";
+import { ar } from "@nuxt/ui/locale";
 
-const lang = computed(() => en.code);
-const dir = computed(() => en.dir);
+const lang = computed(() => ar.code);
+const dir = computed(() => ar.dir);
 
 useHead({
   htmlAttrs: {
