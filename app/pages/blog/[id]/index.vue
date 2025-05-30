@@ -7,6 +7,7 @@
     </div>
     <div class="ring-1 ring-gray-200 dark:ring-gray-600 rounded-md p-4">
       <UForm
+        ref="form"
         class="space-y-6"
         :validate-on="['input', 'blur', 'change']"
         :state="state"
@@ -55,6 +56,20 @@
           input-size="lg"
         />
 
+        <FormSearchMenu
+          v-model="state.links"
+          name="links"
+          label="Resources"
+          size="xl"
+          input-size="lg"
+          url="/resources/all"
+          label-key="title"
+          value-key=""
+          multiple
+          icon="i-lucide-link"
+          placeholder="Select resources"
+        />
+
         <FormInputMenu
           v-if="isEditing"
           v-model="state.status"
@@ -84,6 +99,7 @@
 </template>
 
 <script setup>
+const form = useTemplateRef();
 const {
   breadcrumbsItems,
   loading,
@@ -92,8 +108,7 @@ const {
   handleSubmit,
   statuses,
   isEditing,
-} = await useBlogForm();
+} = await useBlogForm(form);
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

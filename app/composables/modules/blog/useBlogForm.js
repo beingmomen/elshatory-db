@@ -1,5 +1,5 @@
 import Joi from "joi";
-export const useBlogForm = async () => {
+export const useBlogForm = async (formRef) => {
   const { post, patch, get } = useApiRequest();
 
   const route = useRoute();
@@ -50,6 +50,7 @@ export const useBlogForm = async () => {
     tag: "",
     content: "",
     status: "draft",
+    links: [], // This will now store an array of resource IDs
   });
 
   const schema = Joi.object({
@@ -81,16 +82,27 @@ export const useBlogForm = async () => {
       "string.empty": "Status is required",
       "any.required": "Status is required",
     }),
+    links: Joi.array().items(Joi.object()).default([]),
   });
 
   const handleSubmit = async () => {
+    console.warn("formRef", formRef);
     try {
+      // Map state.links to only include title and url
+      const mappedState = {
+        ...state,
+        links: state.links.map((link) => ({
+          title: link.title,
+          url: link.url,
+        })),
+      };
+
       if (isEditing.value) {
-        await patch(`/blogs/${id}`, state, {
+        await patch(`/blogs/${id}`, mappedState, {
           redirectTo: "/blog",
         });
       } else {
-        await post("/blogs", state, {
+        await post("/blogs", mappedState, {
           redirectTo: "/blog",
         });
       }
@@ -110,6 +122,8 @@ export const useBlogForm = async () => {
     state.tag = data.data.tag;
     state.content = data.data.content;
     state.status = data.data.status;
+    // Keep the full objects instead of extracting IDs
+    state.links = data.data.links || [];
   }
 
   return {
