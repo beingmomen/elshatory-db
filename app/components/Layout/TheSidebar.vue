@@ -94,6 +94,11 @@ const items = ref([
       to: "/skills",
     },
     {
+      label: "Resources",
+      icon: "i-lucide-link",
+      to: "/resources",
+    },
+    {
       label: "Services",
       icon: "i-carbon-settings-services",
       to: "/services",
@@ -202,5 +207,4 @@ const itemsFooter = ref([
 ]);
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
