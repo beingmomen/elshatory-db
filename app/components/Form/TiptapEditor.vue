@@ -121,6 +121,9 @@
 </template>
 
 <script setup>
+import { all, createLowlight } from "lowlight";
+const lowlight = createLowlight(all);
+
 const props = defineProps({
   modelValue: {
     type: String,
@@ -159,6 +162,9 @@ const editor = useEditor({
   extensions: [
     TiptapStarterKit,
     TiptapUnderline,
+    TiptapCodeBlockLowlight.configure({
+      lowlight,
+    }),
     TiptapLink.configure({
       openOnClick: true, // Allow clicking links to open them
       defaultProtocol: "https",
@@ -251,11 +257,11 @@ const toolbarGroups = [
     //   isActive: () => editor.value?.isActive("link"),
     //   tooltip: "Link",
     // },
-    // {
-    //   icon: "i-material-symbols-code",
-    //   action: "toggleCode",
-    //   isActive: () => editor.value?.isActive("code"),
-    // },
+    {
+      icon: "i-material-symbols-code",
+      action: "toggleCode",
+      isActive: () => editor.value?.isActive("code"),
+    },
   ],
   // Clear formatting group
   [
