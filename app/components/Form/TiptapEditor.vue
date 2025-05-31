@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <div class="tiptap-editor-ui w-fit mx-auto max-w-[950px]">
+  <!-- {{ max-w-[950px] }} -->
+  <div class="tiptap-editor-ui w-fit mx-auto">
     <div
       v-if="editor"
       class="button-group-container bg-slate-800 rounded-xl flex gap-2 overflow-hidden sticky top-0 z-10"
@@ -91,6 +92,21 @@
         </template>
       </UPopover>
 
+      <UButton
+        size="xl"
+        icon="i-ic-sharp-subdirectory-arrow-left"
+        color="primary"
+        variant="ghost"
+        @click="setHardBreak"
+      />
+      <UButton
+        size="xl"
+        icon="i-material-symbols-horizontal-rule-rounded"
+        color="primary"
+        variant="ghost"
+        @click="setHorizontalRule"
+      />
+
       <UButtonGroup
         v-for="(group, groupIndex) in toolbarGroups"
         :key="groupIndex"
@@ -155,6 +171,14 @@ const setImage = () => {
       })
       .run();
   }
+};
+
+const setHardBreak = () => {
+  editor.value.chain().focus().setHardBreak().run();
+};
+
+const setHorizontalRule = () => {
+  editor.value.chain().focus().setHorizontalRule().run();
 };
 
 const editor = useEditor({
