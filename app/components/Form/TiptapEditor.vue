@@ -1,7 +1,55 @@
 <!-- eslint-disable vue/no-v-html -->
+<!-- في قسم template، أضف checkbox للتحكم في التحرير قبل div الرئيسي -->
 <template>
   <!-- {{ max-w-[950px] }} -->
   <div class="tiptap-editor-ui w-fit mx-auto">
+    <!-- BubbleMenu -->
+    <TiptapBubbleMenu
+      :editor="editor"
+      :tippy-options="{ duration: 100 }"
+      v-if="editor"
+    >
+      <div
+        class="bubble-menu bg-white border border-gray-200 rounded-lg shadow-lg flex p-1"
+      >
+        <UButton
+          size="sm"
+          variant="ghost"
+          icon="i-material-symbols-format-bold"
+          :class="{ 'bg-blue-500 text-white': editor.isActive('bold') }"
+          @click="editor.chain().focus().toggleBold().run()"
+        />
+        <UButton
+          size="sm"
+          variant="ghost"
+          icon="i-material-symbols-format-italic"
+          :class="{ 'bg-blue-500 text-white': editor.isActive('italic') }"
+          @click="editor.chain().focus().toggleItalic().run()"
+        />
+        <UButton
+          size="sm"
+          variant="ghost"
+          icon="i-material-symbols-format-strikethrough"
+          :class="{ 'bg-blue-500 text-white': editor.isActive('strike') }"
+          @click="editor.chain().focus().toggleStrike().run()"
+        />
+        <UButton
+          size="sm"
+          variant="ghost"
+          icon="i-material-symbols-format-underlined"
+          :class="{ 'bg-blue-500 text-white': editor.isActive('underline') }"
+          @click="editor.chain().focus().toggleUnderline().run()"
+        />
+        <UButton
+          size="sm"
+          variant="ghost"
+          icon="i-material-symbols-code"
+          :class="{ 'bg-blue-500 text-white': editor.isActive('code') }"
+          @click="editor.chain().focus().toggleCode().run()"
+        />
+      </div>
+    </TiptapBubbleMenu>
+
     <div
       v-if="editor"
       class="button-group-container bg-slate-800 rounded-xl flex gap-2 overflow-hidden sticky top-0 z-10"
@@ -92,6 +140,117 @@
         </template>
       </UPopover>
 
+      <UPopover
+        :ui="{
+          content: 'w-[350px]',
+        }"
+      >
+        <UButton
+          size="xl"
+          icon="i-mdi-youtube"
+          color="primary"
+          variant="ghost"
+        />
+
+        <template #content>
+          <div class="p-4 space-y-3">
+            <UInput
+              v-model="youtubeUrl"
+              class="w-full"
+              variant="soft"
+              placeholder="YouTube URL"
+            />
+            <div class="flex gap-2">
+              <UInput
+                v-model="youtubeWidth"
+                type="number"
+                placeholder="Width"
+                min="320"
+                max="1024"
+                class="flex-1"
+              />
+              <UInput
+                v-model="youtubeHeight"
+                type="number"
+                placeholder="Height"
+                min="180"
+                max="720"
+                class="flex-1"
+              />
+            </div>
+            <UTooltip
+              v-if="youtubeUrl"
+              text="Add YouTube video"
+              :content="{ side: 'right' }"
+            >
+              <UButton
+                variant="outline"
+                color="primary"
+                size="sm"
+                icon="i-lucide-plus"
+                aria-label="Add YouTube video"
+                class="w-full"
+                @click="setYouTubeVideo"
+              >
+                Add YouTube Video
+              </UButton>
+            </UTooltip>
+          </div>
+        </template>
+      </UPopover>
+
+      <!-- في قسم template، أضف هذا UPopover بعد YouTube popover -->
+      <UPopover
+        :ui="{
+          content: 'w-[300px]',
+        }"
+      >
+        <UButton
+          size="xl"
+          icon="i-material-symbols-highlight"
+          color="primary"
+          :variant="editor.isActive?.('highlight') ? 'solid' : 'ghost'"
+        />
+
+        <template #content>
+          <div class="p-4 space-y-3">
+            <div class="flex items-center gap-2">
+              <UPopover>
+                <UButton label="اختر اللون" color="neutral" variant="outline">
+                  <template #leading>
+                    <span :style="chip" class="size-3 rounded-full" />
+                  </template>
+                </UButton>
+
+                <template #content>
+                  <UColorPicker v-model="highlightColor" class="p-2" />
+                </template>
+              </UPopover>
+            </div>
+            <div class="flex gap-2">
+              <UButton
+                variant="outline"
+                color="primary"
+                size="sm"
+                class="flex-1"
+                @click="setHighlight"
+              >
+                تطبيق التمييز
+              </UButton>
+              <UButton
+                variant="outline"
+                color="red"
+                size="sm"
+                class="flex-1"
+                :disabled="!editor.isActive?.('highlight')"
+                @click="unsetHighlight"
+              >
+                إزالة التمييز
+              </UButton>
+            </div>
+          </div>
+        </template>
+      </UPopover>
       <UButton
         size="xl"
         icon="i-ic-sharp-subdirectory-arrow-left"
@@ -158,6 +317,9 @@ const props = defineProps({
 const emit = defineEmits(["update:modelValue"]);
 
 const image = ref("");
+const youtubeUrl = ref("");
+const youtubeWidth = ref(640);
+const youtubeHeight = ref(480);
 
 const setImage = () => {
   if (image.value) {
@@ -181,6 +343,48 @@ const setHorizontalRule = () => {
   editor.value.chain().focus().setHorizontalRule().run();
 };
 
+const setYouTubeVideo = () => {
+  if (youtubeUrl.value) {
+    editor.value
+      .chain()
+      .focus()
+      .setYoutubeVideo({
+        src: youtubeUrl.value,
+        width: Math.max(320, parseInt(youtubeWidth.value, 10)) || 640,
+        height: Math.max(180, parseInt(youtubeHeight.value, 10)) || 480,
+      })
+      .run();
+
+    // Clear the form after adding
+    youtubeUrl.value = "";
+    youtubeWidth.value = 640;
+    youtubeHeight.value = 480;
+  }
+};
+
+// تأكد من إضافة TiptapBubbleMenu في imports إذا لم يكن موجوداً
+// import { TiptapBubbleMenu } from '@tiptap/vue-3'
+
+// في قسم script setup، أضف هذه المتغيرات والدوال
+const highlightColor = ref("#FAF594"); // اللون الافتراضي للتمييز
+const chip = computed(() => ({ backgroundColor: highlightColor.value }));
+
+// أضف هذه الدوال بعد setYouTubeVideo
+const setHighlight = () => {
+  if (highlightColor.value) {
+    editor.value
+      .chain()
+      .focus()
+      .toggleHighlight({ color: highlightColor.value })
+      .run();
+  }
+};
+
+const unsetHighlight = () => {
+  editor.value.chain().focus().unsetHighlight().run();
+};
+
+// في تكوين editor، أضف TiptapHighlight extension
 const editor = useEditor({
   content: "",
   extensions: [
@@ -190,18 +394,25 @@ const editor = useEditor({
       lowlight,
     }),
     TiptapLink.configure({
-      openOnClick: true, // Allow clicking links to open them
+      openOnClick: true,
       defaultProtocol: "https",
       HTMLAttributes: {
-        rel: "noopener noreferrer nofollow", // Security best practice for external links
-        target: "_blank", // Open links in new tab
+        rel: "noopener noreferrer nofollow",
+        target: "_blank",
       },
-      validate: (href) => /^https?:\/\//.test(href), // Validate URLs
-      autolink: true, // Automatically convert URLs to links
-      linkOnPaste: true, // Convert pasted URLs to links
-      protocols: ["http", "https", "mailto", "tel"], // Allowed protocols
+      validate: (href) => /^https?:\/\//.test(href),
+      autolink: true,
+      linkOnPaste: true,
+      protocols: ["http", "https", "mailto", "tel"],
     }),
     TiptapImage,
+    TiptapYoutube.configure({
+      controls: false,
+      nocookie: true,
+    }),
+    TiptapHighlight.configure({
+      multicolor: true,
+    }),
   ],
   onCreate: ({ editor }) => {
     if (props.modelValue) {
@@ -414,6 +625,7 @@ onBeforeUnmount(() => {
 });
 </script>
 
+// أضف هذه الأنماط في قسم style
 <style lang="scss">
 .tiptap-editor-ui {
   .button-group-container > *:not(:last-child) {
@@ -427,6 +639,27 @@ onBeforeUnmount(() => {
       outline: 2px solid #a1a1aa;
       border-radius: 0.2rem;
       padding: 1rem;
+
+      /* YouTube embed styles */
+      div[data-youtube-video] {
+        cursor: move;
+        padding-right: 1.5rem;
+        margin: 1rem 0;
+
+        iframe {
+          border: 0.2rem solid #a1a1aa;
+          border-radius: 0.5rem;
+          display: block;
+          min-height: 200px;
+          min-width: 200px;
+          outline: 0px solid transparent;
+        }
+
+        &.ProseMirror-selectednode iframe {
+          outline: 3px solid #3b82f6;
+          transition: outline 0.15s;
+        }
+      }
     }
   }
 }
