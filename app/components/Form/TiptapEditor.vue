@@ -5,12 +5,12 @@
   <div class="tiptap-editor-ui w-fit mx-auto">
     <!-- BubbleMenu -->
     <TiptapBubbleMenu
+      v-if="editor"
       :editor="editor"
       :tippy-options="{ duration: 100 }"
-      v-if="editor"
     >
       <div
-        class="bubble-menu bg-white border border-gray-200 rounded-lg shadow-lg flex p-1"
+        class="bubble-menu dark:bg-gray-900 bg-slate-50 border border-gray-200 rounded-lg shadow-lg flex p-1"
       >
         <UButton
           size="sm"
@@ -253,7 +253,7 @@
       </UPopover>
       <UButton
         size="xl"
-        icon="i-ic-sharp-subdirectory-arrow-left"
+        icon="i-lucide-corner-down-left"
         color="primary"
         variant="ghost"
         @click="setHardBreak"
@@ -547,7 +547,7 @@ const toolbarGroups = [
   // Block group
   [
     {
-      icon: "i-material-symbols-code",
+      icon: "i-lucide-code-xml",
       action: "toggleCodeBlock",
       isActive: () => editor.value?.isActive("codeBlock"),
       tooltip: "Code block",
