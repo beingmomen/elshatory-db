@@ -35,7 +35,7 @@
           <UInput
             v-model="localFilter"
             class="max-w-sm"
-            placeholder="Local Filter..."
+            placeholder="البحث السريع ..."
           />
         </div>
         <UDropdownMenu
@@ -147,5 +147,4 @@ const { data, status, globalFilter, page, getRowItems } = await useTableModule({
 });
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
