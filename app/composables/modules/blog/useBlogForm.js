@@ -48,6 +48,7 @@ export const useBlogForm = async (formRef) => {
     image: "",
     altText: "",
     tag: "",
+    keywords: "",
     content: "",
     status: "draft",
     links: [], // This will now store an array of resource IDs
@@ -73,6 +74,10 @@ export const useBlogForm = async (formRef) => {
     tag: Joi.string().required().messages({
       "string.empty": "Tag is required",
       "any.required": "Tag is required",
+    }),
+    keywords: Joi.string().required().messages({
+      "string.empty": "Keywords is required",
+      "any.required": "Keywords is required",
     }),
     content: Joi.string().required().messages({
       "string.empty": "Content is required",
@@ -120,6 +125,7 @@ export const useBlogForm = async (formRef) => {
     state.image = data.data.image;
     state.altText = data.data.altText;
     state.tag = data.data.tag;
+    state.keywords = data.data.keywords;
     state.content = data.data.content;
     state.status = data.data.status;
     // Keep the full objects instead of extracting IDs

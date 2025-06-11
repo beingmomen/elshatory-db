@@ -56,6 +56,14 @@
           input-size="lg"
         />
 
+        <FormInput
+          v-model="state.keywords"
+          label="Keywords"
+          name="keywords"
+          size="xl"
+          input-size="lg"
+        />
+
         <FormSearchMenu
           v-model="state.links"
           name="links"
