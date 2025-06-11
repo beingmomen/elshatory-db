@@ -47,8 +47,9 @@ export const useBlogForm = async (formRef) => {
     description: "",
     image: "",
     altText: "",
-    tag: "",
-    keywords: "",
+    tags: "",
+    keywords:
+      "عبدالمؤمن الشطوري , Frontend Developer , Abdelmomen Elshatory, beingmomen",
     content: "",
     status: "draft",
     links: [], // This will now store an array of resource IDs
@@ -71,9 +72,9 @@ export const useBlogForm = async (formRef) => {
       "string.empty": "Alt text is required",
       "any.required": "Alt text is required",
     }),
-    tag: Joi.string().required().messages({
-      "string.empty": "Tag is required",
-      "any.required": "Tag is required",
+    tags: Joi.string().required().messages({
+      "string.empty": "Tags is required",
+      "any.required": "Tags is required",
     }),
     keywords: Joi.string().required().messages({
       "string.empty": "Keywords is required",
@@ -124,7 +125,7 @@ export const useBlogForm = async (formRef) => {
     state.description = data.data.description;
     state.image = data.data.image;
     state.altText = data.data.altText;
-    state.tag = data.data.tag;
+    state.tags = data.data.tags;
     state.keywords = data.data.keywords;
     state.content = data.data.content;
     state.status = data.data.status;

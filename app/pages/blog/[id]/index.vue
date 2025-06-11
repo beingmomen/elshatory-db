@@ -49,9 +49,9 @@
         />
 
         <FormInput
-          v-model="state.tag"
-          label="Tag"
-          name="tag"
+          v-model="state.tags"
+          label="Tags"
+          name="tags"
           size="xl"
           input-size="lg"
         />
