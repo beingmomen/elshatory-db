@@ -44,8 +44,8 @@ const columns = ref([
     cell: handleImage,
   },
   {
-    accessorKey: "tag",
-    header: "Tag",
+    accessorKey: "tags",
+    header: "Tags",
   },
   {
     accessorKey: "description",
@@ -59,5 +59,4 @@ const columns = ref([
 ]);
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
