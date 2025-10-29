@@ -23,7 +23,7 @@
     "joi": "^17.13.3",
     "next-auth": "~4.21.1",
     "nuxt": "^3.15.4",
-    "nuxt-seo-utils": "^6.0.8",
+    "nuxt-seo-utils": "^7.0.18",
     "nuxt-tiptap-editor": "^2.1.4",
     "pinia": "^2.3.1"
   },
